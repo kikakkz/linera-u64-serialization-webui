@@ -1,11 +1,4 @@
 import { RouteRecordRaw } from 'vue-router'
-import { RouteMetaImpl } from '../utils'
-
-declare module 'vue-router' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface RouteMeta extends RouteMetaImpl {
-  }
-}
 
 const routes: RouteRecordRaw[] = [
   {
@@ -14,16 +7,7 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        component: () => import('pages/Index.vue'),
-        meta: {
-          ShowHeaderAnnouncement: true,
-          ShowMainHeader: false,
-          ShowBigLogo: true,
-          ShowFooterTop: true,
-          ShowSignHelper: true,
-          ShowTopTip: false,
-          NeedLogined: false
-        }
+        component: () => import('pages/Index.vue')
       }
     ]
   },

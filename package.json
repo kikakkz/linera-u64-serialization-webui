@@ -1,9 +1,9 @@
 {
-  "name": "webui-template",
+  "name": "linera-test",
   "version": "0.0.1",
   "description": "vue3 framework use quasar ui and pinia manage store",
   "productName": "WebUI Template",
-  "author": "Entropy Pool Team <kikakkz@hotmail.com>",
+  "author": "ResPeer Team <kikakkz@hotmail.com>",
   "private": true,
   "scripts": {
     "start": "quasar dev",
@@ -25,9 +25,12 @@
     "test:unit:ci"
   ],
   "dependencies": {
+    "@apollo/client": "^3.11.10",
+    "@hazae41/berith": "^1.2.6",
     "@quasar/extras": "^1.0.0",
     "axios": "^0.26.1",
     "core-js": "^3.6.5",
+    "graphql": "^16.9.0",
     "pinia": "^2.0.36",
     "quasar": "^2.0.0",
     "vue": "^3.0.0",

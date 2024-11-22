@@ -28,13 +28,7 @@ module.exports = configure(function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
-    boot: [
-      'pinia',
-      'i18n',
-      'axios',
-      'notify-defaults',
-      'recaptcha'
-    ],
+    boot: [],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: [
@@ -87,7 +81,7 @@ module.exports = configure(function (ctx) {
     devServer: {
       proxy: {
         '/api': {
-          target: 'https://api.development.npool.top',
+          target: 'http://localhost',
           pathRewrite: {
             '^/api': '/api'
           },
@@ -225,7 +219,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'webui-template'
+        appId: 'linera-u64-serialization-test'
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
