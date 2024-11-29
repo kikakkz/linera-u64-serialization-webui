@@ -24,6 +24,7 @@
 
 <script setup lang='ts'>
 import axios from 'axios'
+import { parse } from 'lossless-json'
 import { onMounted, ref } from 'vue'
 import { gql } from '@apollo/client/core'
 import { Ed25519SigningKey, Memory, Berith } from '@hazae41/berith'
@@ -291,10 +292,15 @@ const onGetBlockMaterialClick = async () => {
     variables: {
       chainId: chainId.value
     }
+  },
+  {
+    responseType: 'text',
+    transformResponse: [data => data as string]
   })
   console.log(res)
 
-  const data = (res as unknown as Record<string, unknown>).data
+  const dataString = (res as unknown as Record<string, unknown>).data
+  const data = parse(dataString)
 
   blockMaterial.value = ((data as Record<string, unknown>).data as Record<string, unknown>).blockMaterial
 }
