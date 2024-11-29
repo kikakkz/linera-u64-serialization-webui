@@ -24,6 +24,7 @@
 
 <script setup lang='ts'>
 import axios from 'axios'
+import { parse, stringify } from 'lossless-json'
 import { onMounted, ref } from 'vue'
 import { gql } from '@apollo/client/core'
 import { Ed25519SigningKey, Memory, Berith } from '@hazae41/berith'
@@ -291,16 +292,21 @@ const onGetBlockMaterialClick = async () => {
     variables: {
       chainId: chainId.value
     }
+  },
+  {
+    responseType: 'text',
+    transformResponse: [data => data as string]
   })
   console.log(res)
 
-  const data = (res as unknown as Record<string, unknown>).data
+  const dataString = (res as unknown as Record<string, unknown>).data
+  const data = parse(dataString)
 
   blockMaterial.value = ((data as Record<string, unknown>).data as Record<string, unknown>).blockMaterial
 }
 
 const onExecuteBlockClick = async () => {
-  const res = await axios.post(nodeServiceUrl.value, {
+  const res = await axios.post(nodeServiceUrl.value, stringify({
     query: EXECUTE_BLOCK_WITH_FULL_MATERIALS.loc?.source?.body,
     variables: {
       chainId: chainId.value,
@@ -308,7 +314,7 @@ const onExecuteBlockClick = async () => {
       incomingBundles: (blockMaterial.value as Record<string, unknown>).incomingBundles,
       localTime: (blockMaterial.value as Record<string, number>).localTime
     }
-  })
+  }))
   console.log(res)
 }
 
