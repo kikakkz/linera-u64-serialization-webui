@@ -24,7 +24,7 @@
 
 <script setup lang='ts'>
 import axios from 'axios'
-import { parse } from 'lossless-json'
+import { parse, stringify } from 'lossless-json'
 import { onMounted, ref } from 'vue'
 import { gql } from '@apollo/client/core'
 import { Ed25519SigningKey, Memory, Berith } from '@hazae41/berith'
@@ -306,7 +306,7 @@ const onGetBlockMaterialClick = async () => {
 }
 
 const onExecuteBlockClick = async () => {
-  const res = await axios.post(nodeServiceUrl.value, {
+  const res = await axios.post(nodeServiceUrl.value, stringify({
     query: EXECUTE_BLOCK_WITH_FULL_MATERIALS.loc?.source?.body,
     variables: {
       chainId: chainId.value,
@@ -314,7 +314,7 @@ const onExecuteBlockClick = async () => {
       incomingBundles: (blockMaterial.value as Record<string, unknown>).incomingBundles,
       localTime: (blockMaterial.value as Record<string, number>).localTime
     }
-  })
+  }))
   console.log(res)
 }
 
